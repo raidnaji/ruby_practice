@@ -1,0 +1,11 @@
+<table>
+  <tr>
+    <th colspan="5"></th>
+  </tr>
+  <%= link_to 'New pet', new_pet_path %>
+  <% @pets.each do |p| %>
+    <tr>
+        <td><%= link_to p.name, pet_path(p)  %></td>
+    </tr>
+  <% end %>
+</table>
