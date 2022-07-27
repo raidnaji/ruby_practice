@@ -1,0 +1,3 @@
+[submodule "linkShare"]
+	path = linkShare
+	url = https://github.com/raidnaji/ruby_practice.git
