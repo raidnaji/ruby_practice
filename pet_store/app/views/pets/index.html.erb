@@ -6,6 +6,8 @@
   <% @pets.each do |p| %>
     <tr>
         <td><%= link_to p.name, pet_path(p)  %></td>
+        <td><%= link_to 'Edit', edit_pet_path(p) %></td>
+        <td><%= button_to 'Remove', pet_path(p), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
 </table>
