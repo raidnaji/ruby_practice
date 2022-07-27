@@ -1,0 +1,311 @@
+  [1m[35m (9.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateLinks (20220727195741)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "links" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "url" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220727195741"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-07-27 19:58:50.267923"], ["updated_at", "2022-07-27 19:58:50.267923"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2022-07-27 15:59:18 -0400
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/rnaji/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.0.3.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/rnaji/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/gems/railties-7.0.3.1/lib/rails/templates/rails/welcome/index.html.erb (Duration: 3.9ms | Allocations: 652)
+Completed 200 OK in 114ms (Views: 40.6ms | ActiveRecord: 0.0ms | Allocations: 5114)
+
+
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20220727201538)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime(6), "remember_created_at" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220727201538"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddUserIdToLinks (20220727202246)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "links" ADD "user_id" integer[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_links_on_user_id" ON "links" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220727202246"]]
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2022-07-27 16:25:01 -0400
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (12.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by LinksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering links/index.html.erb within layouts/application
+  [1m[36mLink Load (0.4ms)[0m  [1m[34mSELECT "links".* FROM "links"[0m
+  ↳ app/views/links/index.html.erb:6
+  Rendered links/index.html.erb within layouts/application (Duration: 8.6ms | Allocations: 1675)
+  Rendered layout layouts/application.html.erb (Duration: 412.8ms | Allocations: 90498)
+Completed 200 OK in 438ms (Views: 419.1ms | ActiveRecord: 0.4ms | Allocations: 95399)
+
+
+Started GET "/" for 127.0.0.1 at 2022-07-27 16:37:34 -0400
+Processing by LinksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering links/index.html.erb within layouts/application
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/views/links/index.html.erb:6
+  [1m[36mLink Load (0.6ms)[0m  [1m[34mSELECT "links".* FROM "links"[0m
+  ↳ app/views/links/index.html.erb:6
+  Rendered links/index.html.erb within layouts/application (Duration: 5.4ms | Allocations: 1982)
+  Rendered layout layouts/application.html.erb (Duration: 62.5ms | Allocations: 19386)
+Completed 500 Internal Server Error in 66ms (ActiveRecord: 1.0ms | Allocations: 20342)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `new_user_registration' for #<ActionView::Base:0x0000000000c490>
+
+'.freeze;       link_to 'Sign-up', new_user_registration 
+                                   ^^^^^^^^^^^^^^^^^^^^^
+Did you mean?  new_user_registration_url
+               new_user_registration_path):
+    21:     </ul>
+    22:    <% else %>
+    23:     <ul>
+    24:       <% link_to 'Sign-up', new_user_registration %>
+    25:       <% link_to 'Sign-in', new_user_session_path %>
+    26:     </ul>
+    27:   <% end %>
+  
+app/views/layouts/application.html.erb:24
+Started GET "/" for 127.0.0.1 at 2022-07-27 16:40:00 -0400
+Processing by LinksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering links/index.html.erb within layouts/application
+  [1m[36mLink Load (0.1ms)[0m  [1m[34mSELECT "links".* FROM "links"[0m
+  ↳ app/views/links/index.html.erb:6
+  Rendered links/index.html.erb within layouts/application (Duration: 2.6ms | Allocations: 1267)
+  Rendered layout layouts/application.html.erb (Duration: 21.9ms | Allocations: 9897)
+Completed 500 Internal Server Error in 25ms (ActiveRecord: 0.1ms | Allocations: 10780)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `new_user_registration' for #<ActionView::Base:0x0000000000c828>
+
+'.freeze;       link_to 'Sign-up', new_user_registration 
+                                   ^^^^^^^^^^^^^^^^^^^^^
+Did you mean?  new_user_registration_url
+               new_user_registration_path):
+    21:     </ul>
+    22:    <% else %>
+    23:     <ul>
+    24:       <% link_to 'Sign-up', new_user_registration %>
+    25:       <% link_to 'Sign-in', new_user_session_path %>
+    26:     </ul>
+    27:   <% end %>
+  
+app/views/layouts/application.html.erb:24
+Started GET "/" for 127.0.0.1 at 2022-07-27 16:41:07 -0400
+Processing by LinksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering links/index.html.erb within layouts/application
+  [1m[36mLink Load (0.2ms)[0m  [1m[34mSELECT "links".* FROM "links"[0m
+  ↳ app/views/links/index.html.erb:6
+  Rendered links/index.html.erb within layouts/application (Duration: 4.3ms | Allocations: 1266)
+  Rendered layout layouts/application.html.erb (Duration: 26.8ms | Allocations: 9947)
+Completed 500 Internal Server Error in 30ms (ActiveRecord: 0.2ms | Allocations: 10826)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `new_user_registration' for #<ActionView::Base:0x0000000000cbc0>
+
+      <li>'.freeze; link_to 'Sign-up', new_user_registration ;@output_buffer.safe_append='</li>
+                                       ^^^^^^^^^^^^^^^^^^^^^
+Did you mean?  new_user_registration_url
+               new_user_registration_path):
+    21:     </ul>
+    22:    <% else %>
+    23:     <ul>
+    24:       <li><% link_to 'Sign-up', new_user_registration %></li>
+    25:       <li><% link_to 'Sign-in', new_user_session_path %></li>
+    26:     </ul>
+    27:   <% end %>
+  
+app/views/layouts/application.html.erb:24
+Started GET "/" for 127.0.0.1 at 2022-07-27 16:42:17 -0400
+Processing by LinksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering links/index.html.erb within layouts/application
+  [1m[36mLink Load (0.2ms)[0m  [1m[34mSELECT "links".* FROM "links"[0m
+  ↳ app/views/links/index.html.erb:6
+  Rendered links/index.html.erb within layouts/application (Duration: 2.9ms | Allocations: 1259)
+  Rendered layout layouts/application.html.erb (Duration: 9.8ms | Allocations: 4501)
+Completed 200 OK in 15ms (Views: 12.2ms | ActiveRecord: 0.2ms | Allocations: 5397)
+
+
+Started GET "/" for 127.0.0.1 at 2022-07-27 16:42:27 -0400
+Processing by LinksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering links/index.html.erb within layouts/application
+  [1m[36mLink Load (0.1ms)[0m  [1m[34mSELECT "links".* FROM "links"[0m
+  ↳ app/views/links/index.html.erb:6
+  Rendered links/index.html.erb within layouts/application (Duration: 1.6ms | Allocations: 811)
+  Rendered layout layouts/application.html.erb (Duration: 7.9ms | Allocations: 3444)
+Completed 200 OK in 10ms (Views: 8.4ms | ActiveRecord: 0.1ms | Allocations: 3749)
+
+
+Started GET "/" for 127.0.0.1 at 2022-07-27 16:42:29 -0400
+Processing by LinksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering links/index.html.erb within layouts/application
+  [1m[36mLink Load (0.2ms)[0m  [1m[34mSELECT "links".* FROM "links"[0m
+  ↳ app/views/links/index.html.erb:6
+  Rendered links/index.html.erb within layouts/application (Duration: 2.5ms | Allocations: 815)
+  Rendered layout layouts/application.html.erb (Duration: 10.1ms | Allocations: 3449)
+Completed 200 OK in 13ms (Views: 10.6ms | ActiveRecord: 0.2ms | Allocations: 3740)
+
+
+Started GET "/links/new" for 127.0.0.1 at 2022-07-27 16:43:09 -0400
+Processing by LinksController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering links/new.html.erb within layouts/application
+  Rendered links/_form.html.erb (Duration: 29.2ms | Allocations: 5825)
+  Rendered links/new.html.erb within layouts/application (Duration: 30.2ms | Allocations: 6186)
+  Rendered layout layouts/application.html.erb (Duration: 35.2ms | Allocations: 8967)
+Completed 200 OK in 56ms (Views: 35.6ms | ActiveRecord: 0.7ms | Allocations: 19648)
+
+
+Started GET "/links" for 127.0.0.1 at 2022-07-27 16:43:21 -0400
+Processing by LinksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering links/index.html.erb within layouts/application
+  [1m[36mLink Load (0.1ms)[0m  [1m[34mSELECT "links".* FROM "links"[0m
+  ↳ app/views/links/index.html.erb:6
+  Rendered links/index.html.erb within layouts/application (Duration: 1.5ms | Allocations: 877)
+  Rendered layout layouts/application.html.erb (Duration: 5.4ms | Allocations: 3534)
+Completed 200 OK in 7ms (Views: 6.4ms | ActiveRecord: 0.1ms | Allocations: 3858)
+
+
+Started GET "/links" for 127.0.0.1 at 2022-07-27 16:44:17 -0400
+Processing by LinksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering links/index.html.erb within layouts/application
+  [1m[36mLink Load (0.2ms)[0m  [1m[34mSELECT "links".* FROM "links"[0m
+  ↳ app/views/links/index.html.erb:6
+  Rendered links/index.html.erb within layouts/application (Duration: 2.9ms | Allocations: 1250)
+  Rendered layout layouts/application.html.erb (Duration: 12.2ms | Allocations: 4468)
+Completed 200 OK in 16ms (Views: 14.8ms | ActiveRecord: 0.2ms | Allocations: 5369)
+
+
+Started GET "/links" for 127.0.0.1 at 2022-07-27 16:44:45 -0400
+Processing by LinksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering links/index.html.erb within layouts/application
+  [1m[36mLink Load (0.1ms)[0m  [1m[34mSELECT "links".* FROM "links"[0m
+  ↳ app/views/links/index.html.erb:6
+  Rendered links/index.html.erb within layouts/application (Duration: 2.0ms | Allocations: 1256)
+  Rendered layout layouts/application.html.erb (Duration: 6.2ms | Allocations: 4473)
+Completed 200 OK in 9ms (Views: 7.9ms | ActiveRecord: 0.1ms | Allocations: 5375)
+
+
+Started GET "/links" for 127.0.0.1 at 2022-07-27 16:44:49 -0400
+Processing by LinksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering links/index.html.erb within layouts/application
+  [1m[36mLink Load (0.1ms)[0m  [1m[34mSELECT "links".* FROM "links"[0m
+  ↳ app/views/links/index.html.erb:6
+  Rendered links/index.html.erb within layouts/application (Duration: 1.7ms | Allocations: 1256)
+  Rendered layout layouts/application.html.erb (Duration: 7.4ms | Allocations: 4469)
+Completed 200 OK in 10ms (Views: 9.2ms | ActiveRecord: 0.1ms | Allocations: 5375)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2022-07-27 16:44:50 -0400
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.7ms | Allocations: 261)
+  Rendered devise/shared/_links.html.erb (Duration: 1.1ms | Allocations: 638)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 12.0ms | Allocations: 3858)
+  Rendered layout layouts/application.html.erb (Duration: 16.3ms | Allocations: 6678)
+Completed 200 OK in 25ms (Views: 18.5ms | ActiveRecord: 0.6ms | Allocations: 11624)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2022-07-27 16:44:51 -0400
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.5ms | Allocations: 298)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 7.7ms | Allocations: 2516)
+  Rendered layout layouts/application.html.erb (Duration: 11.5ms | Allocations: 5348)
+Completed 200 OK in 17ms (Views: 13.4ms | ActiveRecord: 0.0ms | Allocations: 7165)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2022-07-27 16:44:53 -0400
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 85)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 1.9ms | Allocations: 1259)
+  Rendered layout layouts/application.html.erb (Duration: 5.5ms | Allocations: 3880)
+Completed 200 OK in 8ms (Views: 6.0ms | ActiveRecord: 0.0ms | Allocations: 4573)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2022-07-27 16:45:01 -0400
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.0ms | Allocations: 21)
+  Rendered devise/shared/_links.html.erb (Duration: 0.1ms | Allocations: 85)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 1.9ms | Allocations: 1244)
+  Rendered layout layouts/application.html.erb (Duration: 5.3ms | Allocations: 3863)
+Completed 200 OK in 7ms (Views: 5.8ms | ActiveRecord: 0.0ms | Allocations: 4458)
+
+
+Started GET "/" for 127.0.0.1 at 2022-07-27 16:45:04 -0400
+Processing by LinksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering links/index.html.erb within layouts/application
+  [1m[36mLink Load (0.1ms)[0m  [1m[34mSELECT "links".* FROM "links"[0m
+  ↳ app/views/links/index.html.erb:6
+  Rendered links/index.html.erb within layouts/application (Duration: 1.6ms | Allocations: 881)
+  Rendered layout layouts/application.html.erb (Duration: 5.6ms | Allocations: 3514)
+Completed 200 OK in 7ms (Views: 5.9ms | ActiveRecord: 0.1ms | Allocations: 3799)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2022-07-27 16:45:47 -0400
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.1ms | Allocations: 21)
+  Rendered devise/shared/_links.html.erb (Duration: 0.4ms | Allocations: 85)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 2.3ms | Allocations: 1244)
+  Rendered layout layouts/application.html.erb (Duration: 10.8ms | Allocations: 3878)
+Completed 200 OK in 12ms (Views: 11.3ms | ActiveRecord: 0.0ms | Allocations: 4471)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2022-07-27 16:45:48 -0400
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 138)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 2.1ms | Allocations: 1250)
+  Rendered layout layouts/application.html.erb (Duration: 6.0ms | Allocations: 3884)
+Completed 200 OK in 8ms (Views: 6.5ms | ActiveRecord: 0.0ms | Allocations: 4568)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2022-07-27 16:45:50 -0400
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.1ms | Allocations: 21)
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 85)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 2.8ms | Allocations: 1244)
+  Rendered layout layouts/application.html.erb (Duration: 7.2ms | Allocations: 3863)
+Completed 200 OK in 9ms (Views: 7.7ms | ActiveRecord: 0.0ms | Allocations: 4467)
+
+
