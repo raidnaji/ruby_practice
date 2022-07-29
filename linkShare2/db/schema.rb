@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_28_152511) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_29_175943) do
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.integer "link_id"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["link_id"], name: "index_comments_on_link_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "links", force: :cascade do |t|
     t.string "title"
     t.string "url"
@@ -48,4 +58,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_28_152511) do
     t.index ["voter_type", "voter_id"], name: "index_votes_on_voter"
   end
 
+  add_foreign_key "comments", "users"
 end

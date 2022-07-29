@@ -1,0 +1,9 @@
+<%= form_with(model: [@link, @link.comments.build ]) do |form| %>
+  <p>
+    <br>
+    <%= form.text_area :body%>
+  </p>
+  <p>
+    <%= form.submit "Add Comment" %>
+  </p>
+<% end %>
