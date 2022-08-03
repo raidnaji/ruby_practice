@@ -2,7 +2,6 @@ class LinksController < ApplicationController
   before_action :set_link, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
 
-
   # GET /links
   # GET /links.json
   def index
@@ -12,7 +11,6 @@ class LinksController < ApplicationController
   # GET /links/1
   # GET /links/1.json
   def show
-     @links = Link.all
   end
 
   # GET /links/new
@@ -23,11 +21,30 @@ class LinksController < ApplicationController
   # GET /links/1/edit
   def edit
   end
+  
+  def like
+    @link = Link.find(params[:id])
+    if (params[:format]) == 'like'
+      @link.liked_by current_user
+    elsif params[:format] == 'unlike'
+      @link.unliked_by current_user
+    end
+    redirect_back fallback_location: root_path
+  end
+
+  def dislike
+    @link = Link.find(params[:id])
+    if params[:format] == 'dislike'
+      @link.disliked_by current_user
+    elsif params[:format] == 'undislike'
+      @link.undisliked_by current_user
+    end
+    redirect_back fallback_location: root_path
+  end
 
   # POST /links
   # POST /links.json
   def create
-    # Modify
     @link = current_user.links.build(link_params)
 
     respond_to do |format|
@@ -39,26 +56,6 @@ class LinksController < ApplicationController
         format.json { render json: @link.errors, status: :unprocessable_entity }
       end
     end
-  end
-  
-  def like
-    @link = Link.find(params[:id])
-    if (params[:format]) == 'like'
-      @link.liked_by current_user
-    elsif params[:format] == 'unlike'
-      @link.unliked_by current_user
-    end
-    redirect_to root_path
-  end
-  
-  def dislike
-    @link = Link.find(params[:id])
-    if (params[:format]) == 'dislike'
-      @link.disliked_by current_user
-    elsif params[:format] == 'undislike'
-      @link.undisliked_by current_user
-    end
-  redirect_to root_path
   end
 
   # PATCH/PUT /links/1
