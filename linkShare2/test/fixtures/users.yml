@@ -9,3 +9,12 @@
 # #
 # two: {}
 # # column: value
+
+# we will use this user
+test_user:
+  email: test@mail.com
+  # :password_digest is a Devise method for password encryption
+  # It will encrypt the string = 'password'
+  # .send is a Ruby method
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+

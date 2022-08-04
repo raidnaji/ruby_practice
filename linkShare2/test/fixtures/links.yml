@@ -2,7 +2,11 @@
 
 linkOne:
   url: mysite.com
+   # to handle the association b/w User and Link
+  user: test_user
 
 linkTwo:
   title: myTitle
   url: anothersite.com
+   # to handle the association b/w User and Link
+  user: test_user
